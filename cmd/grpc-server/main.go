@@ -6,8 +6,9 @@ import (
 	"log"
 	"net"
 	"os"
-	pb "test-grpc/api/proto"
-	p "test-grpc/internal/parser"
+
+	pb "github.com/alexeybobkov47/grpc-gateway-swagger-ui/api/proto"
+	p "github.com/alexeybobkov47/grpc-gateway-swagger-ui/internal/parser"
 
 	"google.golang.org/grpc"
 )

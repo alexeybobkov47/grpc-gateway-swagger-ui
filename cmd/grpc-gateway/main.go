@@ -7,8 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	gw "test-grpc/api/proto"
-
+	gw "github.com/alexeybobkov47/grpc-gateway-swagger-ui/api/proto"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
 )

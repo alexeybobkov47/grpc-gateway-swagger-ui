@@ -2,8 +2,8 @@ package parser
 
 import (
 	"strings"
-	"test-grpc/internal/models"
 
+	"github.com/alexeybobkov47/grpc-gateway-swagger-ui/internal/models"
 	"github.com/gocolly/colly"
 )
 
