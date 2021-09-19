@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  grpc-server:
+    build: 
+      context: .
+      dockerfile: build/Dockerfile.grpc
+    container_name: t_grpc_server
+    ports:
+    - 9090:9090
+    environment:
+      GRPC_PORT: "9090"
+
+  grpc-gateway:
+    build: 
+      context: .
+      dockerfile: build/Dockerfile.gateway
+    container_name: t_grpc_gateway
+    ports:
+    - "8082:8082"
+    environment:
+      GRPC_PORT: "9090"
+      GRPC_HOST: grpc-server
+      GRPC_GATEWAY_PORT: "8082"
+    depends_on:
+    - grpc-server
+    
+  grpc-swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - 8083:8080
+    environment:
+      SWAGGER_JSON: "/api/getInfo.swagger.json"
+    volumes:
+      - ./api/swagger:/api
+    depends_on:
+      - grpc-gateway
+        

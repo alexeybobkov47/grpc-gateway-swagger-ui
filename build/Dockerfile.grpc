@@ -1,0 +1,17 @@
+FROM golang:1.17.1-alpine3.14 AS builder
+WORKDIR /app
+
+COPY go.* ./
+RUN go mod download
+
+COPY . ./
+RUN apk update && apk add date
+RUN apk --no-cache add ca-certificates
+
+RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -o out ./cmd/grpc-server/main.go 
+
+FROM scratch
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=builder /app/out /app/run
+WORKDIR /app
+ENTRYPOINT ["./run"]

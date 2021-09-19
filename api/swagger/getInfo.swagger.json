@@ -1,0 +1,112 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "getInfo.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "GetInfo"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/proto.GetInfo/GetInfoByINN": {
+      "post": {
+        "operationId": "GetInfo_GetInfoByINN",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoGetInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGetInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "GetInfo"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoGetInfoRequest": {
+      "type": "object",
+      "properties": {
+        "inn": {
+          "type": "string"
+        }
+      },
+      "description": "GetInfoRequest - request info by inn."
+    },
+    "protoGetInfoResponse": {
+      "type": "object",
+      "properties": {
+        "inn": {
+          "type": "string",
+          "title": "ИНН"
+        },
+        "kpp": {
+          "type": "string",
+          "title": "КПП"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "Название компании"
+        },
+        "chiefName": {
+          "type": "string",
+          "title": "ФИО руководителя"
+        }
+      },
+      "description": "GetInfoResponse - info to response."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+package proto;
+option go_package = "api/proto;gen";
+
+// GetInfoRequest - request info by inn.
+message GetInfoRequest {
+    string inn = 1;
+}
+// GetInfoResponse - info to response.
+message GetInfoResponse {
+    // ИНН
+    string inn = 1; 
+    // КПП
+    string kpp = 2; 
+    // Название компании
+    string companyName = 3; 
+    // ФИО руководителя
+    string chiefName = 4; 
+}
+// GetInfo - service recive information.
+service GetInfo {
+    rpc GetInfoByINN(GetInfoRequest) returns (GetInfoResponse) {
+    }
+}
