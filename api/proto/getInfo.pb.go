@@ -74,10 +74,14 @@ type GetInfoResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Inn         string `protobuf:"bytes,1,opt,name=inn,proto3" json:"inn,omitempty"`                 // ИНН
-	Kpp         string `protobuf:"bytes,2,opt,name=kpp,proto3" json:"kpp,omitempty"`                 // КПП
-	CompanyName string `protobuf:"bytes,3,opt,name=companyName,proto3" json:"companyName,omitempty"` // Название
-	ChiefName   string `protobuf:"bytes,4,opt,name=chiefName,proto3" json:"chiefName,omitempty"`     // ФИО руководителя
+	// ИНН
+	Inn string `protobuf:"bytes,1,opt,name=inn,proto3" json:"inn,omitempty"`
+	// КПП
+	Kpp string `protobuf:"bytes,2,opt,name=kpp,proto3" json:"kpp,omitempty"`
+	// Название компании
+	CompanyName string `protobuf:"bytes,3,opt,name=companyName,proto3" json:"companyName,omitempty"`
+	// ФИО руководителя
+	ChiefName string `protobuf:"bytes,4,opt,name=chiefName,proto3" json:"chiefName,omitempty"`
 }
 
 func (x *GetInfoResponse) Reset() {
