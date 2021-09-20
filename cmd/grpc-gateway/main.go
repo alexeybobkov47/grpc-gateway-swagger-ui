@@ -14,7 +14,7 @@ import (
 
 var (
 	// command-line options:
-	// gRPC server endpoint
+	// gRPC server endpoint.
 	grpcServer         = os.Getenv("GRPC_HOST") + ":" + os.Getenv("GRPC_PORT")
 	grpcServerEndpoint = flag.String("grpc-server-endpoint", grpcServer, "gRPC server endpoint")
 )

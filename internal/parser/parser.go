@@ -7,14 +7,14 @@ import (
 	"github.com/gocolly/colly"
 )
 
-type ParserInterface interface {
+type ParseInterface interface {
 	ParsePage(url string) (*models.Info, error)
 }
 
-type ParserImpl struct{}
+type ParseImpl struct{}
 
 // ParsePage - parse single page and received information of company.
-func (impl *ParserImpl) ParsePage(url string) (*models.Info, error) {
+func (impl *ParseImpl) ParsePage(url string) (*models.Info, error) {
 	c := colly.NewCollector()
 	var inn, kpp, companyName, chiefName string
 	c.OnHTML("#main", func(e *colly.HTMLElement) {
@@ -32,14 +32,13 @@ func (impl *ParserImpl) ParsePage(url string) (*models.Info, error) {
 					}
 				}
 			})
+			c.OnHTML("#clip_inn", func(e *colly.HTMLElement) {
+				inn = strings.TrimSpace(e.Text)
+			})
+			c.OnHTML("#clip_kpp", func(e *colly.HTMLElement) {
+				kpp = strings.TrimSpace(e.Text)
+			})
 		}
-	})
-
-	c.OnHTML("#clip_inn", func(e *colly.HTMLElement) {
-		inn = strings.TrimSpace(e.Text)
-	})
-	c.OnHTML("#clip_kpp", func(e *colly.HTMLElement) {
-		kpp = strings.TrimSpace(e.Text)
 	})
 
 	if err := c.Visit(url); err != nil {

@@ -17,13 +17,13 @@ var port = os.Getenv("GRPC_PORT")
 
 type Service struct {
 	pb.UnimplementedGetInfoServer
-	p p.ParserInterface
+	p p.ParseInterface
 }
 
 func main() {
 	srv := grpc.NewServer()
 
-	s := &Service{p: &p.ParserImpl{}}
+	s := &Service{p: &p.ParseImpl{}}
 	pb.RegisterGetInfoServer(srv, s)
 
 	listener, err := net.Listen("tcp", ":"+port)
@@ -42,6 +42,8 @@ func (s *Service) GetInfoByINN(ctx context.Context, req *pb.GetInfoRequest) (*pb
 	if err != nil {
 		return nil, err
 	}
-	return &pb.GetInfoResponse{Inn: info.INN, Kpp: info.KPP, CompanyName: info.CompanyName,
-		ChiefName: info.ChiefName}, nil
+	return &pb.GetInfoResponse{
+		Inn: info.INN, Kpp: info.KPP, CompanyName: info.CompanyName,
+		ChiefName: info.ChiefName,
+	}, nil
 }
