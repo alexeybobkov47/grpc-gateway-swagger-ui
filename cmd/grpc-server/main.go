@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net"
 	"os"
@@ -37,8 +36,7 @@ func main() {
 }
 
 func (s *Service) GetInfoByINN(ctx context.Context, req *pb.GetInfoRequest) (*pb.GetInfoResponse, error) {
-	url := fmt.Sprintf("https://www.rusprofile.ru/search?query=%v", req.Inn)
-	info, err := s.p.ParsePage(url)
+	info, err := s.p.ParsePage(req.Inn)
 	if err != nil {
 		return nil, err
 	}
