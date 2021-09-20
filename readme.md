@@ -1,9 +1,13 @@
 Поиск по ИНН:
-http://localhost:8082/getInfo/{ИНН}
+
+    http://localhost:8082/getInfo/{ИНН}
+
 Swagger:
-http://localhost:8083/
+
+    http://localhost:8083/
 
 Makefile:
+
     gen:
         protoc -I=api/proto \
             --go_out=. \
